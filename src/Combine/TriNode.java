@@ -12,7 +12,7 @@ package Combine;
 /**
  * TriNode declaration for software combining trinary-tree.
  * @author Maurice Herlihy
- * @author Peng Wu
+ * @author wolvre
  */
 public class TriNode {
   enum CStatus3{IDLE, FIRST, SECOND, THIRD, RESULT, ROOT};
