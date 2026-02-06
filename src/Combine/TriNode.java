@@ -97,7 +97,8 @@ public class TriNode {
         return oldValue;
       case SECOND:    
       case THIRD:
-        secondValue[ready] = combined;
+        int myIndex = ready;
+        secondValue[myIndex] = combined;
         ready ++;
         if (ready >= num_nodes) {
             locked[0] = false;
@@ -105,7 +106,7 @@ public class TriNode {
         }   
         while (cStatus != CStatus3.RESULT) wait();
         ready --;
-        prior = result[ready];
+        prior = result[myIndex];
         if (ready <= 0) {
             locked[1] = false;
             cStatus = CStatus3.IDLE;
@@ -129,8 +130,8 @@ public class TriNode {
         cStatus = CStatus3.RESULT;
         break;
       case THIRD:
-        result[1] = prior + firstValue;
-        result[0] = result[1] + secondValue[0];
+        result[0] = prior + firstValue;
+        result[1] = result[0] + secondValue[0];
         cStatus = CStatus3.RESULT;
         break;
       default:

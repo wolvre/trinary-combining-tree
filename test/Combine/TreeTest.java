@@ -30,7 +30,7 @@ public class TreeTest extends TestCase {
 
   public static Test suite() {
     TestSuite suite = new TestSuite();//TreeTest.class);
-    for (int i=0; i<2; i++)
+    for (int i=0; i<5; i++)
         suite.addTestSuite(TreeTest.class);
     return suite;
   }
@@ -38,7 +38,7 @@ public class TreeTest extends TestCase {
   public void testGetAndIncrement() throws Exception {
     System.out.printf("Parallel, %d threads, %d tries\n", THREADS, TRIES);
     for (int i = 0; i < THREADS; i++) {
-      thread[i] = new MyThread();
+      thread[i] = new MyThread3();
     }
     for (int i = 0; i < THREADS; i ++) {
       thread[i].start();
@@ -52,12 +52,29 @@ public class TreeTest extends TestCase {
   public void tearDown() throws Exception {
     for (int i = 0; i < test.length; i++) {
         test[i] = false;
+        instance.test[i] = false;
         instance3.test[i] = false;
     }
     ThreadID.reset();
   }
   
    class MyThread extends Thread {
+    public void run() {
+      try {
+        for (int j = 0; j < TRIES; j++) {
+          int i = instance.getAndIncrement();
+          if (test[i]) {
+            //System.out.printf("ERROR duplicate value %d\n", i);
+            return;
+          } else {
+            test[i] = true;
+          }
+        }
+      } catch (InterruptedException e) {}
+    }
+  }
+
+  class MyThread3 extends Thread {
     public void run() {
       try {
         for (int j = 0; j < TRIES; j++) {
@@ -73,13 +90,13 @@ public class TreeTest extends TestCase {
     }
   }
    
-   void check(boolean[] test) throws Exception {
-     for (int i = 0; i < test.length; i++) {
-       if (!test[i]) {
-         System.out.println("missing value at " + i);
-         throw new Exception();
-       }
-     }
-   }
+  void check(boolean[] test) throws Exception {
+    for (int i = 0; i < test.length; i++) {
+      if (!test[i]) {
+        System.out.println("missing value at " + i);
+        throw new Exception();
+      }
+    }
+  }
   
 }

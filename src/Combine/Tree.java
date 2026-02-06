@@ -10,7 +10,7 @@ import java.util.Stack;
  * @author mph
  */
 public class Tree {
-  final static int THREADS = 8;
+  final static int THREADS = 12;
   final static int TRIES = 1024 * 1024;
   static boolean[] test = new boolean[THREADS * TRIES];
     
