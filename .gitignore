@@ -1,0 +1,23 @@
+# Compiled class files
+*.class
+build/
+dist/
+
+# Logs and intermediates
+*.log
+*.aux
+*.toc
+*.out
+*.fdb_latexmk
+*.fls
+*.tex
+*.pdf
+
+# IDEs
+.metals/
+.vscode/
+nbproject/private/
+
+# Libraries
+lib/
+*.jar
