@@ -91,6 +91,18 @@ public class TreeTest extends TestCase {
   }
    
   void check(boolean[] test) throws Exception {
+    int expected = THREADS * TRIES;
+    int maxResult = 0;
+    for (int i = test.length - 1; i >= 0; i--) {
+      if (test[i]) {
+        maxResult = i + 1;
+        break;
+      }
+    }
+    System.out.println("Expected final value: " + expected);
+    System.out.println("Actual max value: " + maxResult);
+    System.out.println("Test " + (maxResult == expected ? "PASSED" : "FAILED"));
+
     for (int i = 0; i < test.length; i++) {
       if (!test[i]) {
         System.out.println("missing value at " + i);
