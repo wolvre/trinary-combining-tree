@@ -10,8 +10,7 @@ dist/
 *.out
 *.fdb_latexmk
 *.fls
-*.tex
-*.pdf
+*.xdv
 
 # IDEs
 .metals/
@@ -21,3 +20,4 @@ nbproject/private/
 # Libraries
 lib/
 *.jar
+src/kimi/*.java
